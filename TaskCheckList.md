@@ -1,6 +1,8 @@
 This is a check list for all the tasks we need to accomplish for this site.
 This is mostly just to ensure that we can still make pull request for issues that don't require actually updating the code in the repository.
 
+- [x] Create Issues for each task below
+
 -[x] Creating an issue for each task for the site
      - Enter a comment here <br/>
 -[x] Work on each task in a new branch
