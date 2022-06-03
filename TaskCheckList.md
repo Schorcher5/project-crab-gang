@@ -5,7 +5,6 @@ This is mostly just to ensure that we can still make pull request for issues tha
      - Enter a comment here <br/>
 -[x] Work on each task in a new branch
      - Enter a comment here <br/>
-     
 -[x] Open a pull request when a task is finished
      - Enter a comment here <br/>
 -[x] Add an "About yourself" section to the site
