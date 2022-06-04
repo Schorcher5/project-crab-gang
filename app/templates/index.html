@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<section class="text-center form-signin w-100 m-auto">
-	<h4>To make your portfolio. please share some info with us!</h4>
+<section class=" form-signin w-100 m-auto">
+	<h4 class = "text-center">To make your portfolio. please share some info with us!</h4>
 	<form action="/portfolio" method="post" enctype="multipart/form-data">
 		
 		<div class="form-floating ">
@@ -16,9 +16,20 @@
 			<input type="text" class = "form-control"  id="hobby" name="hobby" placeholder = "Enter a hobby" required>
 			<input type="text" class = "form-control" id = "impression" name = "impression" placeholder = "Enter a palce you visited" required>
 			<input type="text" class = "form-control"  id="song" name="song" placeholder = "Enter one song you like" required>
-			<input type="file" class = "form-control"  id="picture" name="picture" accept="image/png, image/jpeg, image/gif, image/svg" placeholder = "Upload a photo of yourself"  required>
+			<div class = "input-group">
+				<div class = "input-group-prepend">
+					<span class = "input-group-text" id="inputGroupFileAddon01">Upload</span>
+				</div>
+				<div class = "custom-file">
+					<input type="file" class = "text-start custom-file-input"  id="picture" name="picture" accept="image/png, image/jpeg, image/gif, image/svg" placeholder = "Upload a photo of yourself"  required>
+					<label class = "custom-file-label" for="picture">Upload an image of yourself</label>
+				</div>
+			</div>
 			<input type = "text" class = "form-control"  id="platform" name = "platform" placeholder = "Enter a link to your linkedin or other media"  required>
-			<input class = "mt-3 btn btn-primary" type="submit" value="Submit">
+			
+			<div class = "text-center">
+				<input class = " mt-3 btn btn-primary" type="submit" value="Submit">
+			</div>
 
 
 		</div>
