@@ -10,7 +10,7 @@ This is mostly just to ensure that we can still make pull request for issues tha
 - [ ] Add your hobbies
 - [ ] Add your current/previous education
 - [ ] Add a map of all the cool locations/countries you visited
-- [ ] Get your Flask app running locally on your machine using the instructions below.
+- [x] Get your Flask app running locally on your machine using the instructions below.
 - [ ] Add a template for adding multiple work experiences/education/hobbies using Jinja
 - [ ] Create a new page to display hobbies.
 - [ ] Add a menu bar that dynamically displays other pages in the app
