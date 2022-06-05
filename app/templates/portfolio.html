@@ -2,36 +2,57 @@
 
 {% block content %}
 
-{{fname}}
-<br>
 
-{{lname}}
-<br>
+<section class ="" >
+<section class = "container-fluid row text-start pt-5 mt-sm-5 text-secondary">
 
-{{summary}}
-<br>
+	<div class = "col-sm-6 pl-sm-5 ">
+		<h2>{{fname}} {{lname}}</h2>
+		<h3>Who I am</h3>
+		<p class = "mt-2">{{summary}}</p>
+	</div>
+	<div class = "col-sm-6 pr-sm-5 ">
+		<img class = "img-fluid mw-100 rounded border border-secondary"  src="/static/img/{{pic_path}}" />
+	</div>
+	
 
-{{email}}
-<br>
+</section>
 
-{{hobby}}
-<br>
+<h1 class = "text-secondary text-center fw-bold fs-1 mt-5" >...</h1>
+
+<section class = "container-fluid row text-start">
+	<div class ="col-sm-6 pl-sm-5">
+
+	</div>
+	<div class = "col-sm-6 pr-sm-5">
+		
+	</div>
+
+</section>
+
+<h1 class = "text-secondary text-center fw-bold fs-1 mt-5" >...</h1>
+
+<section class = "container-fluid row text-secondary text-start">
+	<div class = "col-sm-6 px-5 mt-5 pt-5 text-sm-start">
+		<h3>Reach out me at</h3>
+		<p>{{platform}}</p>
+		<p>{{email}}</p>
+	</div>
+	<div class = "col-sm-6 px-5 text-sm-center">
+		<img class = "img-fluid mw-100 rounded m-5 p-5" src = "/static/img/contact-list.png" />
+	</div>
+</section>
+</section>
+
+
 
 {{experience}}
-<br>
 
 {{education}}
-<br>
 
 {{impression}}
-<br>
 
 {{song}}
-<br>
 
-{{platform}}
-<br>
-
-<img src="/static/img/{{pic_path}}" />
 
 {% endblock %}
