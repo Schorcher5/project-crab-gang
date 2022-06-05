@@ -116,6 +116,6 @@ body {
 
 }
 
-.container-fluid {
-	padding: 0 15%;
+.padding-stuff{
+	padding: 10rem !important;
 }
