@@ -69,17 +69,17 @@ def karl():
 
 @app.route('/joaquin')
 def joaquin():
-    first_name = "Karl"
-    last_name = "Hernandez"
-    summary = ""
-    email = "cjh16@rice.edu"
-    work_exp = ""
-    hobby = ""
-    education = ""
+    first_name = "Joaquin"
+    last_name = "Cisneros"
+    summary = "I'm a 3rd year computer science major at the University of the Fraser Valley. Aspiring full-stack developer who is always looking to improve themself"
+    email = "2014joaquincisneros@gmaill.com"
+    work_exp = ["University of the Fraser Valley: Computer Lab Monitor (2021)","Major League Hacking: Production engineer fellow (2022)"]
+    hobby = ["Videogames", "Anime", "Leetcoding"]
+    education = "University of the Fraser Valley: Bachelor of Science"
     impression = ""
     song = ""
-    platform = ""
-    filename = ""
+    platform = "https://www.linkedin.com/in/joaquin-cisneros-271256225/"
+    filename = "profilePicture.jpg"
     return render_template('portfolio.html', fname=first_name, lname=last_name,
                            summary=summary, experience=work_exp, email=email, hobby=hobby,
                            impression=impression, education=education, song=song,
