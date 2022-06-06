@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 from os import urandom
 from typing import List
+from google_images_search import GoogleImagesSearch
 import pickle
 
 config = load_dotenv("example.env")
@@ -12,6 +13,7 @@ app = Flask(__name__)
 app.secret_key = urandom(32)  # random 32 bit key
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+gis = GoogleImagesSearch(os.getenv("GOOGLE_PLACES_API"), '5415378a637e6f6e0')
 
 
 class Data():
@@ -168,7 +170,15 @@ def hobbies():
     if 'current_user' not in session:
         return render_template("error.html", title="Error", error="User is not in session")
     user = pickle.loads(session['current_user'])
-    return render_template("hobbies.html", hobbies=user.hobbies)
+
+    hobbies = {}
+    for hobby in user.hobbies:
+        gis.search(search_params={'q': hobby})
+        for image in gis.results():
+            hobbies[hobby] = str(image.url)
+
+
+    return render_template("hobbies.html", hobbies=hobbies)
 
 
 if __name__ == "__main__":
