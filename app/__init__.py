@@ -53,7 +53,7 @@ def index():
 def karl():
     first_name = "Karl"
     last_name = "Hernandez"
-    summary = ""
+    summary = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices nunc nec faucibus placerat. Etiam pretium eros sit amet eleifend scelerisque. Nunc tincidunt ligula in mi euismod maximus. Donec aliquet erat vitae fermentum euismod. Pellentesque lacinia neque sed condimentum efficitur. Duis condimentum lectus vitae justo posuere, sit amet fermentum enim porta. Duis imperdiet quam ex, nec dignissim risus pretium a. Quisque pharetra sagittis finibus. Vestibulum eu pretium justo, eu venenatis lacus. Etiam molestie mauris sit amet velit aliquam semper. Donec sit amet an"
     email = "cjh16@rice.edu"
     work_exp = []
     hobbies = []
