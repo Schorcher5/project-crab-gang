@@ -3,82 +3,75 @@
 {% block content %}
 
 
-<section style="padding-right: 15%;padding-left: 15%;" >
-<section class = "container-fluid row text-start pt-5 mt-sm-5">
+<section class = "container-fluid gradient-background promo text-white row text-start pt-5 mt-sm-5">
 
 	<div class = "col-sm-6 pl-sm-5 ">
-		<h2>{{fname}} {{lname}}</h2>
+		<h1 class ="title">{{fname}} {{lname}}</h1>
 		<h3>Who I am</h3>
-		<p class = "mt-2">{{summary}}</p>
+		<p class = "description">{{summary}}</p>
 	</div>
 	<div class = "col-sm-6 pr-sm-5 ">
-		<img class = "img-fluid mw-100 rounded border border-secondary"  src="/static/img/{{pic_path}}" />
+		<img class = "img-fluid mw-100 rounded-5 border border-secondary"  src="/static/img/{{pic_path}}" />
 	</div>
 
 
 </section>
 
-<h1 class = "text-secondary text-center fw-bold fs-1 my-5" >...</h1>
 
-<section class = "container-fluid row text-start">
+<section class = "container-fluid row text-start text-secondary">
 	<div class ="col-sm-6 pl-sm-5">
-		<h3>Work Experience</h3>
-		<h6>{{experience}}</h6>
+		<h2 class = "title">Work Experience</h2>
+		<p class = "description">{{experience}}</p>
 	</div>
-	<div class = "col-sm-6 pr-sm-5">
-		<img class = "img-fluid mw-100 rounded m-5 p-5" src = "/static/img/briefcase.png" />
+	<div class = "col-sm-6 pr-sm-5 text-sm-end">
+		<img class = "img-fluid mw-100  rounded" src = "/static/img/breifcase.png" />
 	</div>
 
 </section>
 
-<h1 class = "text-secondary text-center fw-bold fs-1 my-5" >...</h1>
 
-<section class = "container-fluid row text-start">
+<section class = "container-fluid gradient-background promo text-white row text-start">
 	<div class = "col-sm-6 pl-sm-5">
-		<h3>Education</h3>
-		<h6>{{education}}</h6>
+		<h2 class = "title">Education</h2>
+		<p class = "description">{{education}}</p>
 	</div>
-	<div class = "col-sm-6 pr-sm-5">
-		<img class = "img-fluid mw-100 rounded m-5 p-5" src = "/static/img/graduate.png" />
+	<div class = "col-sm-6 pr-sm-5 text-sm-end">
+		<img class = "img-fluid mw-100 rounded" src = "/static/img/graduate.png" />
 	</div>
 </section>
 
-<h1 class = "text-secondary text-center fw-bold fs-1 my-5" >...</h1>
 
-<section class = "container-fluid row text-start">
+<section class = "text-secondary container-fluid row text-start">
 	<div class = "col-sm-6 pl-sm-5">
-		<h3>Here is a place I've visited before</h3>
-		<img class = "img-fluid mw-100 rounded m-5 p-5" src = "/static/img/travel.png" />
+		<h2 class = "title">Here is a place I've visited before</h2>
+		<img class = "img-fluid pt-3 mw-100 rounded" src = "/static/img/travel.png" />
 	</div>
-	<div class = "col-sm-6 pl-sm-5 ">
+	<div class = "col-sm-6 pl-sm-5 text-sm-end">
 		<div class = "img-fluid" >{{impression|safe}}</div>
 	</div>
 </section>
 
-<h1 class = "text-secondary text-center fw-bold fs-1 my-5" >...</h1>
 
-<section class = "container-fluid row text-start">
+<section class = "container-fluid gradient-background promo text-white row text-start">
 	<div class = "col-sm-6 pl-sm-5">
-		<h3>Here is a song I like</h3>
-		<img class = "img-fluid mw-100 rounded m-5 p-5" src = "/static/img/music-sign.png">
+		<h2 class ="title">Here is a song I like</h2>
+		<img class = "img-fluid pt-3 mw-100 rounded" src = "/static/img/music-sign.png">
 	</div>
-	<div class = "col-sm-6 pl-sm-5">
+	<div class = "col-sm-6 pl-sm-5 text-sm-end">
 		{{song|safe}}
 	</div>
 </section>
 
-<h1 class = "text-secondary text-center fw-bold fs-1 my-5" >...</h1>
 
-<section class = "container-fluid row text-start">
+<section class = "container-fluid row text-start text-secondary">
 	<div class = "col-sm-6 px-5 mt-5 pt-5 text-sm-start">
 		<h3>Reach out to me at</h3>
 		<p>{{platform}}</p>
 		<p>{{email}}</p>
 	</div>
 	<div class = "col-sm-6 px-5 text-sm-center">
-		<img class = "img-fluid mw-100 rounded m-5 p-5" src = "/static/img/contact-list.png" />
+		<img class = "img-fluid mw-100 rounded m-5 p-5" src = "/static/img/contact.png" />
 	</div>
-</section>
 </section>
 
 <script>
