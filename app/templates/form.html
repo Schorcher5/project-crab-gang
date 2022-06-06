@@ -2,8 +2,10 @@
 
 {% block content %}
 
-<section class=" form-signin w-100 m-auto">
-	<h4 class="text-center">To make your portfolio. please share some info with us!</h4>
+<div class = "gradient-background promo container-fluid text-center">
+	<img class = "img-fluid mw-100 mb-3"  src="/static/img/forms.png" />	
+<section class=" form-signin w-100 m-auto rounded text-bg-light">
+	<h4 class = "text-center mb-4 text-secondary">Fill out this form to generate your page</h4>
 	<form action="/portfolio" method="post" enctype="multipart/form-data">
 
 		<div class="form-floating ">
@@ -86,6 +88,8 @@
 		</div>
 	</form>
 </section>
+</div>
+
 <script>
 	google.maps.event.addDomListener(window, 'load', initialize);
 	function initialize() {
