@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+		{% for hobby in hobbies %}
+<div class="jumbotron" style="text-align:center">
+	<h2>{{hobby}}</h2>
+	</div>
+		{% endfor %}
+
+
+{% endblock %}
