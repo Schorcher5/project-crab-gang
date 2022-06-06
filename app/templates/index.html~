@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class = "nav-bar text-white">
+	<div class="container-fluid row">
+      <div class="text-sm-start col-sm-6 pt-5">
+        <h1 class="title">Joaquin Cisneros</h1>
+        <p class="description">I am a computer science student at UFV and a aspiring software engineer. Learning full-stack/front-end development right now, but hope to do back-end one day!</p>
+        <a href="/joaquin" class="btn" title="personal site" aria-label="Joaquin's site">Check out my portfolio!</a>
+      </div>
+      <div class="home-gif col-sm-6">
+        <img src="images/first.gif" alt="Gif a person programming">
+      </div>
+    </div>
+</section>
+
+{% endblock %}
