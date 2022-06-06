@@ -5,16 +5,14 @@ from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 from os import urandom
 from typing import List
-import json
 import pickle
 
-load_dotenv()
+config = load_dotenv("example.env")
 UPLOAD_FOLDER = "./app/static/img/"
 app = Flask(__name__)
 app.secret_key = urandom(32)  # random 32 bit key
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 class Data():
@@ -32,12 +30,6 @@ class Data():
         self.platform: str = platform
         self.filename: str = filename
         self.title: str = title
-
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.errorhandler(404)
@@ -96,7 +88,9 @@ def joaquin():
 
 @app.route('/form')
 def form():
-    return render_template('form.html', title="Create Your Own Portfolio")
+    places_api = os.getenv("GOOGLE_PLACES_API")
+    return render_template('form.html', title="Create Your Own Portfolio",
+            places_api=places_api)
 
 @app.route('/portfolio', methods=["POST"])
 def portfolio():
@@ -119,31 +113,26 @@ def portfolio():
 
     title = first_name + " " + last_name
 
+    summary = summary.replace('\r\n', '\\n')
+
+    long = request.form["long"]
+    lat = request.form["lat"]
+    place_id = request.form["place_id"]
+    places_api = str(os.getenv("GOOGLE_PLACES_API"))
+
+    query = "https://www.google.com/maps/embed/v1/place?key={}&q=place_id:{}&center={},{}&zoom=5".format(places_api, place_id, lat, long)
+
     return render_template('portfolio.html', fname=first_name, lname=last_name,
                            summary=summary, experience=work_exp, email=email, hobby=hobby,
                            impression=impression, education=education, song=song,
-                           platform=platform, pic_path=filename, title=title)
+                           platform=platform, pic_path=filename, title=title,
+                           query=query)
 
 
-@app.route('/portfolio')
+@app.route('/hobbies')
 def hobby():
     return "hobbyies"
 
 
 if __name__ == "__main__":
-    first_name = "Karl"
-    last_name = "Hernandez"
-    summary = ""
-    email = "cjh16@rice.edu"
-    work_exp = []
-    hobbies = []
-    education = []
-    impression = ""
-    song = ""
-    platform = ""
-    filename = "signal-2022-05-31-163344_001.jpeg"
-    title = first_name + " " + last_name
-    what = Data(first_name, last_name, summary, email, work_exp, hobbies, education, impression, song, platform, filename, title)
-    print(what.__dict__)
-    print(json.dumps(what.__dict__))
     app.run(debug=True)

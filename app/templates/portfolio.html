@@ -2,13 +2,14 @@
 
 {% block content %}
 
-
 <section class = "container-fluid gradient-background promo text-white row text-start">
-
 	<div class = "col-sm-6 pl-sm-5 ">
 		<h1 class ="title">{{fname}} {{lname}}</h1>
 		<h3>Who I am</h3>
-		<p class = "description">{{summary}}</p>
+		<div id="summary-content"></div>
+		<script>
+			document.getElementById('summary-content').innerHTML = marked.parse("{{summary}}");
+		</script>
 	</div>
 	<div class = "col-sm-6 pr-sm-5 ">
 		<img class = "img-fluid mw-100 rounded-5 border border-secondary"  src="/static/img/{{pic_path}}" />
@@ -46,6 +47,18 @@
 		<h2 class = "title">Here is a place I've visited before</h2>
 		<img class = "img-fluid pt-3 mw-100 rounded" src = "/static/img/travel.png" />
 	</div>
+	<div class="map">
+	<iframe
+	  width="450"
+	  height="250"
+	  frameborder="0" style="border:0"
+	  referrerpolicy="no-referrer-when-downgrade"
+	  src="{{query}}"
+	  allowfullscreen>
+	</iframe>
+		
+	</div>
+
 	<div class = "col-sm-6 pl-sm-5 text-sm-end">
 		<div class = "img-fluid" >{{impression|safe}}</div>
 	</div>
@@ -82,9 +95,6 @@
 
 
 </script>
-
-
-
 
 
 {% endblock %}
