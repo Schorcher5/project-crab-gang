@@ -31,7 +31,7 @@ class Data():
         self.pic_path: str = filename
         self.title: str = title
         self.query: str = query
-        self.resume: str = resume
+        self.resume_path: str = resume
 
 
 @app.errorhandler(404)
@@ -49,14 +49,14 @@ def index():
 def karl():
     first_name = "Karl"
     last_name = "Hernandez"
-    summary = "I am a person"
+    summary = "I am a Mathematics and Linguistics major at Rice University hoping to go to grad school. Currently very interested in CS Theory!"
     email = "cjh16@rice.edu"
-    experience = "what"
-    hobbies = ["Sleep"]
-    education = "heck"
-    location= ""
+    experience = ["Rice Lambda Group", "Rice Linux Group", "Open Source Experience", "StuyvesantCCC"]
+    hobbies = ["Reading", "Cooking", "Coding", "Mathematical Problem Solving", "Sleeping"]
+    education = ["Rice University", "Stuyvesant High School"]
+    location = ""
     song = ""
-    platform = ""
+    platform = "https://github.com/KarlWithK/"
     filename = "signal-2022-05-31-163344_001.jpeg"
     title = first_name + " " + last_name
     places_api = str(os.getenv("GOOGLE_PLACES_API"))
@@ -82,18 +82,30 @@ def joaquin():
     last_name = "Cisneros"
     summary = "I'm a 3rd year computer science major at the University of the Fraser Valley. Aspiring full-stack developer who is always looking to improve themself"
     email = "2014joaquincisneros@gmaill.com"
-    work_exp = ["University of the Fraser Valley: Computer Lab Monitor (2021)","Major League Hacking: Production engineer fellow (2022)"]
-    hobby = ["Videogames", "Anime", "Leetcoding"]
-    education = "University of the Fraser Valley: Bachelor of Science"
-    impression = ""
+    experience = ["University of the Fraser Valley: Computer Lab Monitor (2021)","Major League Hacking: Production engineer fellow (2022)"]
+    hobbies = ["Videogames", "Anime", "Leetcoding"]
+    education = ["University of the Fraser Valley: Bachelor of Science"]
+    location = ""
     song = ""
     platform = "https://www.linkedin.com/in/joaquin-cisneros-271256225/"
     filename = "profilePicture.jpg"
-    return render_template('portfolio.html', fname=first_name, lname=last_name,
-                           summary=summary, experience=work_exp, email=email, hobby=hobby,
-                           location=location, education=education, song=song,
-                           platform=platform, title="Karl Hernandez",
-                           pic_path=filename)
+    title = first_name + " " + last_name
+
+    places_api = str(os.getenv("GOOGLE_PLACES_API"))
+    query = "https://www.google.com/maps/embed/v1/place?key={}&q=place_id:ChIJg7dqcMY1hFQRYAV7KhU1AQU&center=49.0504377,-122.3044697&zoom=5".format(
+        places_api)
+
+    resume = "JoaquinCisnerosResume.pdf"
+
+    joaquin = Data(first_name, last_name, summary, email, experience, hobbies,
+                education, location, song, platform, filename, title, query,
+                resume)
+
+    session['current_user'] = pickle.dumps(joaquin)
+
+
+    return render_template('portfolio.html', **joaquin.__dict__)
+
 
 
 @app.route('/form')
@@ -111,9 +123,9 @@ def portfolio():
 
     summary = request.form["summary"].replace('\r\n', '\\n')
     email = request.form["email"]
-    experience = request.form["experience"]
+    experience = [x for x in request.form["experience"].split(',')]
     hobbies = [x for x in request.form["hobbies"].split(',')]
-    education = request.form["education"]
+    education = [x for x in request.form["education"].split(',')]
     location = request.form["location"]
 
     song = request.form["song"]
@@ -123,12 +135,14 @@ def portfolio():
     picture = request.files["picture"]
     filename = secure_filename(picture.filename)  # type: ignore
     path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    print(path)
     picture.save(path)
 
     # resumes are a bit more hard :(
     resume = request.files["resume"]
     resume_path = secure_filename(resume.filename)  # type: ignore
-    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], resume_path)
+    print(path)
     resume.save(path)
 
     # google maps stuff

@@ -22,7 +22,11 @@
 <section class = "container-fluid row text-start text-secondary">
 	<div class ="col-sm-6 pl-sm-5">
 		<h2 class = "title">Work Experience</h2>
-		<p class = "description">{{experience}}</p>
+		<ul>
+			{% for work in experience%}
+			<li>{{work}}</li>
+			{% endfor %}
+		</ul>
 	</div>
 	<div class = "col-sm-6 pr-sm-5 text-sm-end">
 		<img class = "img-fluid mw-100  rounded" src = "/static/img/breifcase.png" />
@@ -34,7 +38,10 @@
 <section class = "container-fluid gradient-background promo text-white row text-start">
 	<div class = "col-sm-6 pl-sm-5">
 		<h2 class = "title">Education</h2>
-		<p class = "description">{{education}}</p>
+
+			{% for edu in education%}
+			<p class = "description">{{edu}}</p>
+			{% endfor %}
 	</div>
 	<div class = "col-sm-6 pr-sm-5 text-sm-end">
 		<img class = "img-fluid mw-100 rounded" src = "/static/img/graduate.png" />
@@ -67,12 +74,17 @@
 
 <section class = "container-fluid gradient-background promo text-white row text-start">
 	<div class = "col-sm-6 pl-sm-5">
-		<h2 class ="title">Here is a song I like</h2>
+		<h2 class ="title">Here is my resume:</h2>
 		<img class = "img-fluid pt-3 mw-100 rounded" src = "/static/img/music.png">
 	</div>
-	<div class = "col-sm-6 pl-sm-5 text-sm-end">
-		{{song|safe}}
-	</div>
+	<iframe
+	  frameborder="0"
+	  scrolling="no"
+	  width="640"
+	  height="480"
+	src="/static/img/{{resume_path}}" 
+	>
+	</iframe>
 </section>
 
 
