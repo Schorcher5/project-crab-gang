@@ -37,7 +37,7 @@ p {
 }
 
 .container-fluid {
-  padding: 7% 15% 13%;
+  padding: 7% 15% 13% !important;
 }
 
 .gradient-background {
