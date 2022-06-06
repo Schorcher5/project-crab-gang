@@ -8,7 +8,7 @@
 	<div class = "col-sm-6 pl-sm-5 ">
 		<h1 class ="title">{{fname}} {{lname}}</h1>
 		<h3>Who I am</h3>
-		<p class = "description">{{summary}}</p>
+		<p class = "content">{{summary}}</p>
 	</div>
 	<div class = "col-sm-6 pr-sm-5 ">
 		<img class = "img-fluid mw-100 rounded-5 border border-secondary"  src="/static/img/{{pic_path}}" />
@@ -83,8 +83,10 @@
 
 </script>
 
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    document.getElementById('content').innerHTML =
+      marked.parse('{{summary}}');
+  </script>
 
 {% endblock %}
