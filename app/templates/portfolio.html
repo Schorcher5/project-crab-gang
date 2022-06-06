@@ -10,6 +10,7 @@
 		<script>
 			document.getElementById('summary-content').innerHTML = marked.parse("{{summary}}");
 		</script>
+		<a href = "/hobbies" class = "btn text-white" title = "hobbies page" aria-label = "Hobbies section">Check out my hobbies>></a>
 	</div>
 	<div class = "col-sm-6 pr-sm-5 ">
 		<img class = "img-fluid mw-100 rounded-5 border border-secondary"  src="/static/img/{{pic_path}}" />
@@ -52,10 +53,12 @@
 <section class = "text-secondary container-fluid row text-start">
 	<div class = "col-sm-6 pl-sm-5">
 		<h2 class = "title">Here is a place I've visited before</h2>
+		<div class = "text-center">
 		<img class = "img-fluid pt-3 mw-100 rounded" src = "/static/img/travelBlue.png" />
+		</div>
 	</div>
-	<div class="map">
-	<iframe class = "img-fluid"
+	<div class="map col-sm-6 pr-sm-5">
+	<iframe 
 	  width="450"
 	  height="250"
 	  frameborder="0" style="border:0"
@@ -66,18 +69,18 @@
 		
 	</div>
 
-	<div class = "col-sm-6 pl-sm-5 text-sm-end">
-		<div class = "img-fluid" >{{location|safe}}</div>
-	</div>
 </section>
 
 
 <section class = "container-fluid gradient-background promo text-white row text-start">
 	<div class = "col-sm-6 pl-sm-5">
 		<h2 class ="title">Here is my resume:</h2>
-		<img class = "img-fluid pt-3 mw-100 rounded" src = "/static/img/music.png">
+		<div class = "text-center">
+		<img class = "img-fluid pt-3 mw-100 rounded" src = "/static/img/resumeSymbol.png">
+		</div>
 	</div>
-	<iframe
+	<div class = "col-sm-6 pr-sm-5">
+	<iframe class = ""
 	  frameborder="0"
 	  scrolling="no"
 	  width="640"
@@ -85,6 +88,7 @@
 	src="/static/img/{{resume_path}}" 
 	>
 	</iframe>
+	</div>
 </section>
 
 
@@ -102,7 +106,8 @@
 <script>
 	const allIFrames = document.getElementsByTagName("iframe");
 	for(var i =0; i<allIFrames.length; i++){
-		allIFrames[i].classList.add("img-fluid");
+		allIFrames[i].classList.add("mw-100");
+		allIFrames[i].classList.add("rounded");
 	};
 
 
