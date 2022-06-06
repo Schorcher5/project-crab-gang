@@ -12,60 +12,78 @@
 			<div>
 				<input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
 			</div>
-			<div>
 
-				<input type="text" class="form-control"  id="lname" name="lname" placeholder = "Last Name" required>
-			</div>
 			<div>
-				<input type="email" class="form-control"  id="email" name="email" placeholder = "Enter your email"  required>
-			</div>
-			<div>
-
-				<input type="text" class = "form-control"  id="experience" name="experience" placeholder = "Enter a previous work expierience"  required>
-			</div>
-			<div>
-
-				<input type="text" class = "form-control"  id="education" name="education" placeholder = "Enter your lastest education"  required>
+				<input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
 			</div>
 
 			<div>
-
-				<textarea style="white-space: pre-wrap;" type="text" class="form-control"  id="summary" name="summary" placeholder = "Enter a Summary"  required></textarea>
+				<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
 			</div>
-			<div>
 
-				<input type="text" class = "form-control"  id="hobby" name="hobby" placeholder = "Enter a hobby" required>
+			<div>
+				<input type="text" class="form-control" id="experience" name="experience"
+					placeholder="Enter a previous work expierience" required>
 			</div>
-			<div>
 
-				<input type="text" class = "form-control" id = "impression" name = "impression" placeholder = "Enter the embed for a location on google maps" required>
+			<div>
+				<input type="text" class="form-control" id="education" name="education"
+					placeholder="Enter your lastest education" required>
+			</div>
+
+			<div>
+				<input type="text" class="form-control" id="platform" name="platform"
+					placeholder="Enter a link to your linkedin or other media" required>
+			</div>
+
+			<div>
+				<textarea style="white-space: pre-wrap;" type="text" class="form-control" id="summary" name="summary"
+					placeholder="Enter a Summary" required></textarea>
+			</div>
+
+			<div>
+				<input type="text" class="form-control" id="hobbies" name="hobbies" placeholder="Enter your hobbies sepearted by commas!" required>
+			</div>
+
+			<div>
+				<input type="text" class="form-control" id="location" name="location"
+					placeholder="Where do you live?" required>
 				<input type="hidden" id="long" name="long">
 				<input type="hidden" id="lat" name="lat">
 				<input type="hidden" id="place_id" name="place_id">
-
 			</div>
+
 			<div>
-
-				<input type="text" class = "form-control"  id="song" name="song" placeholder = "Enter the embed for a song on spotify" required>
+				<input type="text" class="form-control" id="song" name="song"
+					placeholder="Tell us your favorite song!" required>
 			</div>
-			<div class = "input-group">
-				<div class = "input-group-prepend">
-					<span class = "input-group-text" id="inputGroupFileAddon01">Upload</span>
+
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
 				</div>
-				<div class = "custom-file">
-					<input type="file" class = "text-start custom-file-input"  id="picture" name="picture" accept="image/png, image/jpeg, image/gif, image/svg" placeholder = "Upload a photo of yourself"  required>
-					<label class = "custom-file-label" for="picture">Upload an image of yourself</label>
+				<div class="custom-file">
+					<input type="file" class="text-start custom-file-input" id="picture" name="picture"
+						accept="image/png, image/jpeg, image/gif, image/svg" placeholder="Upload a photo of yourself" required>
+					<label class="custom-file-label" for="picture">Upload an image of yourself</label>
 				</div>
 			</div>
-			<div>
 
-				<input type = "text" class = "form-control"  id="platform" name = "platform" placeholder = "Enter a link to your linkedin or other media"  required>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+				</div>
+				<div class="custom-file">
+					<input type="file" class="text-start custom-file-input" id="resume" name="resume"
+						accept="image/pdf" placeholder="Upload your resume" required>
+					<label class="custom-file-label" for="resume">Upload your resume</label>
+				</div>
 			</div>
 
-			<div class = "text-center">
-				<input class = " mt-3 btn btn-primary" type="submit" value="Submit" onclick="">
-			</div>
 
+			<div class="text-center">
+				<input class=" mt-3 btn btn-primary" type="submit" value="Submit" onclick="">
+			</div>
 
 		</div>
 	</form>
@@ -75,24 +93,26 @@
 <script>
 	google.maps.event.addDomListener(window, 'load', initialize);
 	function initialize() {
-			var input = document.getElementById('impression');
-			var autocomplete = new google.maps.places.Autocomplete(input);
-			autocomplete.addListener('place_changed', function () {
-					var place = autocomplete.getPlace();
-					// place variable will have all the information you are looking for.
-					$('#lat').val(place.geometry['location'].lat());
-					$('#long').val(place.geometry['location'].lng());
-					$('#place_id').val(place.place_id);
-				});
+		var input = document.getElementById('location');
+		var autocomplete = new google.maps.places.Autocomplete(input);
+		autocomplete.addListener('place_changed', function () {
+			var place = autocomplete.getPlace();
+			// place variable will have all the information you are looking for.
+			$('#lat').val(place.geometry['location'].lat());
+			$('#long').val(place.geometry['location'].lng());
+			$('#place_id').val(place.place_id);
+		});
 
+	}
+
+
+	var simplemde = new SimpleMDE({
+		element: document.getElementById("summary"), forceSync: true,
+		renderingConfig: {
+			singleLineBreaks: false,
+			codeSyntaxHighlighting: true,
 		}
-
-
-	var simplemde = new SimpleMDE({ element: document.getElementById("summary"), forceSync: true, 	
-			renderingConfig: {
-					singleLineBreaks: false,
-					codeSyntaxHighlighting: true,
-				}});
+	});
 	simplemde.value();
 </script>
 

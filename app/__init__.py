@@ -1,6 +1,5 @@
 import os
 from flask import Flask, render_template, request, session
-from flask import url_for, redirect
 from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 from os import urandom
@@ -17,55 +16,65 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 class Data():
     def __init__(self, first_name, last_name, summary, email, work_exp, hobbies,
-            education, impression, song, platform, filename, title):
-        self.first_name: str = first_name
-        self.last_name: str = last_name
+                 education, location, song, platform, filename, title, query,
+                 resume):
+        self.fname: str = first_name
+        self.lname: str = last_name
         self.summary: str = summary
         self.email: str = email
-        self.work_exp: List[str] = work_exp
-        self.hobby: List[str] = hobbies
+        self.experience: List[str] = work_exp
+        self.hobbies: List[str] = hobbies
         self.education: List[str] = education
-        self.impression: str = impression
+        self.location: str = location
         self.song: str = song
         self.platform: str = platform
-        self.filename: str = filename
+        self.pic_path: str = filename
         self.title: str = title
+        self.query: str = query
+        self.resume: str = resume
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("error.html", title="Page Not Found", url=os.getenv("URL"))
+    return render_template("error.html", title="Page Not Found", error="Page not found")
 
 
 @app.route('/')
 def index():
+    print('current_user' in session)
     return render_template('index.html', title="Homepage")
+
 
 @app.route('/karl')
 def karl():
     first_name = "Karl"
     last_name = "Hernandez"
-    summary = ""
+    summary = "I am a person"
     email = "cjh16@rice.edu"
-    work_exp = []
-    hobbies = []
-    education = []
-    impression = ""
+    experience = "what"
+    hobbies = ["Sleep"]
+    education = "heck"
+    location= ""
     song = ""
     platform = ""
     filename = "signal-2022-05-31-163344_001.jpeg"
     title = first_name + " " + last_name
-    karl = Data(first_name, last_name, summary, email, work_exp, hobbies, education, impression, song, platform, filename, title)
-    pickled_karl = pickle.dumps(karl)
-    session['current_user'] = pickled_karl
-    krl = pickle.loads(session['current_user'])
+    places_api = str(os.getenv("GOOGLE_PLACES_API"))
+    query = "https://www.google.com/maps/embed/v1/place?key={}&q=place_id:ChIJCSF8lBZEwokRhngABHRcdoI&center=40.6781784,-73.9441579&zoom=5".format(
+        places_api)
 
-    return render_template('portfolio.html', fname=first_name, lname=last_name,
-                           summary=summary, experience="", email=email,
-                           hobby="none",
-                           impression=impression, education="", song=song,
-                           platform=platform, title="Karl Hernandez",
-                           pic_path=filename)
+    resume = "karl.pdf"
+
+    karl = Data(first_name, last_name, summary, email, experience, hobbies,
+                education, location, song, platform, filename, title, query,
+                resume)
+
+    session['current_user'] = pickle.dumps(karl)
+    print('current_user' in session)
+    # krl = pickle.loads(session['current_user'])
+
+    return render_template("portfolio.html", **karl.__dict__)
+
 
 @app.route('/joaquin')
 def joaquin():
@@ -82,26 +91,31 @@ def joaquin():
     filename = "profilePicture.jpg"
     return render_template('portfolio.html', fname=first_name, lname=last_name,
                            summary=summary, experience=work_exp, email=email, hobby=hobby,
-                           impression=impression, education=education, song=song,
+                           location=location, education=education, song=song,
                            platform=platform, title="Karl Hernandez",
                            pic_path=filename)
+
 
 @app.route('/form')
 def form():
     places_api = os.getenv("GOOGLE_PLACES_API")
     return render_template('form.html', title="Create Your Own Portfolio",
-            places_api=places_api)
+                           places_api=places_api)
+
 
 @app.route('/portfolio', methods=["POST"])
 def portfolio():
     first_name = request.form["fname"]
     last_name = request.form["lname"]
-    summary = request.form["summary"]
+    title = first_name + " " + last_name
+
+    summary = request.form["summary"].replace('\r\n', '\\n')
     email = request.form["email"]
-    work_exp = request.form["experience"]
-    hobby = request.form["hobby"]
+    experience = request.form["experience"]
+    hobbies = [x for x in request.form["hobbies"].split(',')]
     education = request.form["education"]
-    impression = request.form["impression"]
+    location = request.form["location"]
+
     song = request.form["song"]
     platform = request.form["platform"]
 
@@ -111,27 +125,36 @@ def portfolio():
     path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     picture.save(path)
 
-    title = first_name + " " + last_name
+    # resumes are a bit more hard :(
+    resume = request.files["resume"]
+    resume_path = secure_filename(resume.filename)  # type: ignore
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    resume.save(path)
 
-    summary = summary.replace('\r\n', '\\n')
-
+    # google maps stuff
     long = request.form["long"]
     lat = request.form["lat"]
     place_id = request.form["place_id"]
     places_api = str(os.getenv("GOOGLE_PLACES_API"))
 
-    query = "https://www.google.com/maps/embed/v1/place?key={}&q=place_id:{}&center={},{}&zoom=5".format(places_api, place_id, lat, long)
+    query = "https://www.google.com/maps/embed/v1/place?key={}&q=place_id:{}&center={},{}&zoom=5".format(
+        places_api, place_id, lat, long)
 
-    return render_template('portfolio.html', fname=first_name, lname=last_name,
-                           summary=summary, experience=work_exp, email=email, hobby=hobby,
-                           impression=impression, education=education, song=song,
-                           platform=platform, pic_path=filename, title=title,
-                           query=query)
+    user = Data(first_name, last_name, summary, email, experience, hobbies,
+                education, location, song, platform, filename, title, query,
+                resume_path)
+
+    session['current_user'] = pickle.dumps(user)
+
+    return render_template("portfolio.html", **user.__dict__)
 
 
 @app.route('/hobbies')
-def hobby():
-    return "hobbyies"
+def hobbies():
+    if 'current_user' not in session:
+        return render_template("error.html", title="Error", error="User is not in session")
+    user = pickle.loads(session['current_user'])
+    return render_template("hobbies.html", hobbies=user.hobbies)
 
 
 if __name__ == "__main__":
