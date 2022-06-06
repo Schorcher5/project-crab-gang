@@ -2,6 +2,29 @@
 
 {% block content %}
 
+ <section id="projects" class="gradient-background promo text-secondary">
+    <div class="container-fluid">
+      <h1 class=" title text-white text-sm-start pb-5 ">Here are some of my hobbies</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-4  ">
+	{% for hobby in hobbies %}
+        <div class="col">
+          <div class="card border border-secondary">
+            <div class="card-img-top" >
+              <div class="carousel-inner">
+                  <img src="static/img/{hobbieImage}" class="d-block w-100" alt = "Image failed to load">
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{hobby}}</h5>
+            </div>
+          </div>
+        </div>
+	  {% endfor %}
+      </div>
+    </div>
+  </section>
+
+
 		{% for hobby in hobbies %}
 <div class="jumbotron" style="text-align:center">
 	<h2>{{hobby}}</h2>
