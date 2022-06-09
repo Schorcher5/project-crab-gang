@@ -1,7 +1,7 @@
 
 //Creates nodelist of all items with the .load class
 
-const loading = document.querySelectorForAll(".load");
+const loading = document.querySelectorAll(".load");
 
 const options = {
   root:null,
