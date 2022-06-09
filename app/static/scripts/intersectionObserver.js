@@ -25,6 +25,6 @@ const observer = new IntersectionObserver(function(entries,observer){
 //Initializes the observer
 loading.forEach(load =>{
   observer.observe(load);
-}
+});
                 
        
