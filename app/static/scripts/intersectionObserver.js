@@ -11,12 +11,14 @@ const options = {
 
 //Set up observer that switches load class with loaded when tag is observed in the viewport
 const observer = new IntersectionObserver(function(entries,observer){
-  entries.forEach(entry => {
-    if(entry.target.classList.toggle("loaded");
-       observer.unobserve(entry.target);
+  entries.forEach(entry => { 
+      if(entry.isIntersecting){
+       entry.target.classList.toggle("loaded");
+       observer.unobserve(entry.target);        
+      }
+
     
   });
-  
 },options);
 
 
