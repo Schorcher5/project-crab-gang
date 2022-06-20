@@ -117,6 +117,13 @@ def form():
                            places_api=places_api)
 
 
+
+    return render_template("portfolio.html", **user.__dict__)
+    return render_template("portfolio.html", **user.__dict__)
+    return render_template("portfolio.html", **user.__dict__)
+    return render_template("portfolio.html", **user.__dict__)
+
+
 @app.route('/portfolio', methods=["POST"])
 def portfolio():
     first_name = request.form["fname"]
@@ -130,7 +137,8 @@ def portfolio():
     education = [x for x in request.form["education"].split(',')]
     location = request.form["location"]
 
-    song = request.form["song"]
+    # song = request.form["song"]
+    song = ""
     platform = request.form["platform"]
 
     # pictures are a bit more hard :(
@@ -163,7 +171,6 @@ def portfolio():
     session['current_user'] = pickle.dumps(user)
 
     return render_template("portfolio.html", **user.__dict__)
-
 
 @app.route('/hobbies')
 def hobbies():
