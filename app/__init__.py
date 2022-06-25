@@ -7,6 +7,8 @@ from typing import List
 from google_images_search import GoogleImagesSearch
 import pickle
 from peewee import *
+import datetime
+from playhouse.shortcuts import model_to_dict
 
 config = load_dotenv("example.env")
 UPLOAD_FOLDER = "./app/static/img/"
@@ -17,6 +19,19 @@ app.secret_key = urandom(32)  # random 32 bit key
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 gis = GoogleImagesSearch(os.getenv("GOOGLE_PLACES_API"), '5415378a637e6f6e0')
+
+
+class TimelinePost(Model):
+    name = CharField()
+    email = CharField()
+    content = TextField()
+    created_at = DateTimeField(default=datetime.datetime.now)
+
+    class Meta:
+        database = mydb
+
+mydb.connect()
+mydb.create_tables([TimelinePost])
 
 
 class Data():
@@ -190,6 +205,23 @@ def hobbies():
 
     return render_template("hobbies.html", hobbies=hobbies)
 
+@app.route('/api/timeline_post', methods=['POST'])
+def post_time_line_post():
+    name = request.form['name']
+    email = request.form['email']
+    content = request.form['content']
+    timeline_post = TimelinePost.create(name=name, email=email, content=content)
+
+    return model_to_dict(timeline_post)
+
+@app.route('/api/timeline_post', methods=['GET'])
+def get_time_line_post():
+    return {
+            'timeline_posts': [
+                model_to_dict(p)
+                for p in 
+                TimelinePost.select().order_by(TimelinePost.created_at.desc())]
+            }
 
 if __name__ == "__main__":
     app.run(debug=True)
