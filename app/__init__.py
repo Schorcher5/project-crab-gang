@@ -12,6 +12,7 @@ config = load_dotenv("example.env")
 UPLOAD_FOLDER = "./app/static/img/"
 app = Flask(__name__)
 mydb =  MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv("MYSQL_HOST"), port=3306)
+print(mydb)
 app.secret_key = urandom(32)  # random 32 bit key
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
