@@ -230,7 +230,7 @@ def timeline():
 
         session['current_user'] = pickle.dumps(post)
 
-        return render_template('timeline.html', post)
+        return render_template('timeline.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
