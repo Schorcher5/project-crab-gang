@@ -223,5 +223,14 @@ def get_time_line_post():
                 TimelinePost.select().order_by(TimelinePost.created_at.desc())]
             }
 
+@app.route('timeline')
+def timeline():
+        
+        post =  [ model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
+
+        session['current_user'] = pickle.dumps(post)
+
+        return render_template('timeline.html', post)
+
 if __name__ == "__main__":
     app.run(debug=True)

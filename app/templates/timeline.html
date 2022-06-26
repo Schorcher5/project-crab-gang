@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class = "gradient-background promo container-fluid text-center">
+	<img class = "img-fluid mw-100 mb-3"  src="/static/img/forms.png" />	
+<section class=" form-signin w-100 m-auto rounded text-bg-light">
+	<h4 class = "text-center mb-4 text-secondary">Fill out this form to make a post</h4>
+	<form action="/api/timeline_post" method="post" enctype="multipart/form-data">
+
+		<div class="form-floating ">
+			<div>
+				<input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+			</div>
+
+			<div>
+				<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+			</div>
+
+			<div>
+				<textarea style="white-space: pre-wrap;" type="text" class="form-control" id="content" name="content"
+					placeholder="Enter a Summary" required></textarea>
+			</div>
+
+			<div class="text-center">
+				<input class=" mt-3 btn btn-primary" type="submit" value="Submit" onclick="">
+			</div>
+
+			{% for p in post %}
+			<div class="col">
+				<div class="card border border-secondary">
+				<div class="card-body">
+					<h5 class="card-title">{{p}}</h5>
+				</div>
+				</div>
+			</div>
+	  		{% endfor %}
+		</div>
+	</form>
+</section>
+</div>
+
+
+{% endblock %}
