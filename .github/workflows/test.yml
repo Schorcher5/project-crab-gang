@@ -27,6 +27,9 @@ jobs:
                         - name: Install Dependencies
                           run: python3-virtualenv/bin/pip install -r requirements.txt
 
+                        - name: Install Google Images Search seperatly
+                          run: python3-virtualenv/bin/pip install google_images_search
+
                         - name: Run Tests
                           run: ./run_test.sh
 
