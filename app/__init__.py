@@ -20,7 +20,6 @@ if os.getenv("TESTING") == "true":
 else:
     mydb =  MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv("MYSQL_HOST"), port=3306)
 print(mydb)
-print("Tits ",os.getenv)
 app.secret_key = urandom(32)  # random 32 bit key
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -59,6 +58,10 @@ class Data():
         self.query: str = query
         self.resume_path: str = resume
 
+
+@app.errorhandler(400)
+def bad_request(e, issue="Bad request"):
+    return render_template("invalid.html", title="Bad Request", error="Invalid request", e=issue), 400
 
 @app.errorhandler(404)
 def not_found(e):
@@ -216,6 +219,14 @@ def post_time_line_post():
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
+
+    if(len(name) == 0):
+        return bad_request(e="", issue="Invalid name")
+    elif(len(email) == 0 or "@" not in email):
+        return bad_request(e="", issue="Invalid email")
+    elif(len(content) == 0):
+        return bad_request(e="", issue="Invalid content")
+
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
