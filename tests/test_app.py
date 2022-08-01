@@ -14,6 +14,8 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert '<title> Homepage </title>' in html
+        assert '<meta charset="utf-8">' in html
+        assert '<script async src="https://maps.googleapis.com/maps/api/js?key={{places_api}}&libraries=places"></script>' in html
         assert "<a href=" in html
         assert "<footer" in html
 
